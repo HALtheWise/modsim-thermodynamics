@@ -7,9 +7,9 @@ function res = rocket_flows( stocks, params )
     
     % Calculate variables
     fuel_mass = p.fuel_density * p.fuel_volume; %kg
-    fuel_heat_capacity = fuel_mass * p.fuelspecific_heat;
+    fuel_heat_capacity = fuel_mass * p.fuel_specific_heat;
     
-    metal_mass = p.mnetal_volume * p.metal_density;
+    metal_mass = p.metal_volume * p.metal_density;
     metal_heat_capacity = metal_mass * p.metal_specific_heat;
     
     % TODO: This should be handled in an external function
@@ -34,7 +34,7 @@ function res = rocket_flows( stocks, params )
         (fuel_temp - p.fuel_cold_temp); % mass exchange
    
     %TODO: this needs to become a column vector for ode45 compatibility
-    res = [heat_from_exhaust - radiative_loss - transfer_to_coolant,
+    res = [heat_from_exhaust - radiative_loss - transfer_to_coolant, ...
             transfer_to_coolant - coolant_inflow];
 end
 
