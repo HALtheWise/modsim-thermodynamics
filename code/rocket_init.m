@@ -8,7 +8,6 @@ initial_temperature = 300; % K
 metal_heat = p.metal_density*p.metal_volume * p.metal_specific_heat * p.metal_initial_temp;
 fuel_heat = p.fuel_density*p.fuel_volume * p.fuel_specific_heat * p.fuel_cold_temp;
 stocks = [metal_heat, fuel_heat];
-clear('p')
 
 % Create extra tracking for Temperature
 global MetalTemperatures;
@@ -19,6 +18,11 @@ FuelTemperatures = initial_temperature;
 % Run simulation
 time_span = [0 100];
 [Times, Stocks] = ode45(@rocket_flows, time_span, stocks, [], params);
+
+for i=1:size(Stocks)
+    Stocks(i, 1) = energy_to_temp(Stocks(i, 1), p.metal_specific_heat * p.metal_volume * p.metal_density);
+    Stocks(i, 2) = energy_to_temp(Stocks(i, 2), p.fuel_specific_heat * p.fuel_volume * p.fuel_density);
+end
 
 plot(Times, Stocks);
 % Graph results
