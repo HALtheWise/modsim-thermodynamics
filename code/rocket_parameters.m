@@ -4,20 +4,21 @@ p.air_temp = 290;
 
 p.fuel_specific_heat = 15000; % paper
 p.fuel_cold_temp = 91.7; % K, paper
-p.fuel_volume = 0.84 * pi; % WAG
+p.fuel_volume = 1; 
 p.fuel_density = 71.0; % paper
+p.fuel_heat_capacity = p.fuel_volume * p.fuel_density * p.fuel_specific_heat;
 
 p.metal_specific_heat = 450; % paper (copper)
 p.metal_initial_temp = 290; 
 p.metal_volume = 0.84 * pi;
 p.metal_surface_area = 8 * pi;
 p.metal_density = 8890; % paper
-p.metal_radiative_emmisivity = .3; %need value for metal
+p.metal_radiative_emmisivity = 0.02; %copper (unoxidized)
 
 p.tubing_surface_area = 8 * pi;
 
-p.heat_transfer_coefficient = 3000; %complete guess
+p.heat_transfer_coefficient = 1200; %math behind this is extremely complex, this is the value of heat transfer coefficient for water flowing in tubes
 
-p.heat_flow_from_exhaust = 1e6; %J/s WAG
+p.heat_flow_from_exhaust = 3500;
 
-p.fuel_flow_rate = .2; %m^3/s WAG
+p.fuel_flow_rate = 0.01; %m^3/s
