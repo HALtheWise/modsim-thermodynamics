@@ -2,6 +2,7 @@ function res = rocket_flows(~, stocks, params)
 %ROCKET_FLOWS computes flows for the Thermodynamics project
     metal_energy = stocks(1);
     fuel_energies = stocks(2:length(stocks));
+    num_fuel = length(fuel_energies);
     
     p = params;
     
@@ -13,7 +14,6 @@ function res = rocket_flows(~, stocks, params)
     metal_heat_capacity = metal_mass * p.metal_specific_heat;
     
     % TODO: This should be handled in an external function
-    fuel_temp = fuel_energies / fuel_heat_capacity;
     metal_temp = metal_energy / metal_heat_capacity;
     
     %Calculate flows
@@ -22,13 +22,32 @@ function res = rocket_flows(~, stocks, params)
     heat_from_exhaust = p.heat_flow_from_exhaust; % J/s
     radiative_loss = p.metal_radiative_emmisivity*SB*p.metal_surface_area * ...
         (metal_temp ^ 4 - p.air_temp^4); % J/s
-    transfer_to_coolant = p.heat_transfer_coefficient * ...
-        p.tubing_surface_area * (metal_temp - fuel_temp); % J/s convective
-    coolant_inflow = p.fuel_flow_rate * p.fuel_density * ...
-        (fuel_temp - p.fuel_cold_temp); % mass exchange
+    %transfer_to_coolant = p.heat_transfer_coefficient * ...
+    %    p.tubing_surface_area * (metal_temp - fuel_temp); % J/s convective
+    %coolant_inflow = p.fuel_flow_rate * p.fuel_density * ...
+    %    (fuel_temp - p.fuel_cold_temp); % mass exchange
    
+    transfers_to_fuel = zeros(1,num_fuel);
+    transfers_between_fuel = zeros(1,num_fuel);
+    
+    for i=1:num_fuel
+        if i == 1
+            lastTemp = p.fuel_cold_temp;
+        end
+        fuel_temp = fuel_energies(i) / fuel_heat_capacity;
+        transfers_to_fuel(i) = p.heat_transfer_coefficient * ...
+            p.tubing_surface_area/num_fuel * (metal_temp - fuel_temp); % J/s convective
+
+        transfers_between_fuel(i) = p.fuel_flow_rate * ...
+            p.fuel_heat_capacity * p.fuel_density * ...
+            (fuel_temp - lastTemp);
+        
+        lastTemp = fuel_temp;
+    end
+    
     %TODO: this needs to become a column vector for ode45 compatibility
-    res = [(heat_from_exhaust - radiative_loss - transfer_to_coolant) ; 
-            (transfer_to_coolant - coolant_inflow)];
+    res = cat(2, heat_from_exhaust - radiative_loss - sum(transfers_to_fuel),...
+                transfers_between_fuel);
+ 
 end
 
