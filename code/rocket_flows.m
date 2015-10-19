@@ -1,5 +1,5 @@
 function res = rocket_flows( stocks, params )
-%COFFEE_FLOWS computes flows for coffee problem in Exercise Set 5
+%ROCKET_FLOWS computes flows for the Thermodynamics project
     metal_energy = stocks(1);
     fuel_energy = stocks(2);
     
@@ -16,14 +16,14 @@ function res = rocket_flows( stocks, params )
     fuel_temp = fuel_energy / fuel_heat_capacity;
     metal_temp = metal_energy / metal_heat_capacity;
     
-    % Export coffe_temp
+    % Export temperatures
     global FuelTemperatures;
     FuelTemperatures(length(FuelTemperatures)+1) = fuel_temp;
     global MetalTemperatures;
     MetalTemperatures(length(MetalTemperatures)+1) = metal_temp;
     
     %Calculate flows
-    SB = 5.67e-8; %W/m2K
+    SB = 5.67e-8; %W/m2K: Stefan-Boltzman constant
     
     heat_from_exhaust = p.heat_flow_from_exhaust; % J/s
     radiative_loss = p.metal_radiative_emmisivity*SB*p.metal_surface_area * ...
