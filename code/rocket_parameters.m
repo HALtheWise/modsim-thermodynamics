@@ -12,7 +12,7 @@ p.metal_initial_temp = 290;
 p.metal_volume = 0.84 * pi;
 p.metal_surface_area = 8 * pi;
 p.metal_density = 8890; % paper
-p.metal_radiative_emmisivity = ; %need value for metal
+p.metal_radiative_emmisivity = .3; %need value for metal
 
 p.tubing_surface_area = 8 * pi;
 
