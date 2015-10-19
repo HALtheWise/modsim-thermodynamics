@@ -1,6 +1,5 @@
 % Define simulation parameters
 rocket_parameters; %Call to external definition of flow parameters
-params = p;
 
 initial_temperature = 300; % K
 
@@ -16,8 +15,8 @@ global FuelTemperatures;
 FuelTemperatures = initial_temperature;
 
 % Run simulation
-time_span = [0 100];
-[Times, Stocks] = ode45(@rocket_flows, time_span, stocks, [], params);
+time_span = [0 200];
+[Times, Stocks] = ode45(@rocket_flows, time_span, stocks, [], p);
 
 for i=1:size(Stocks)
     Stocks(i, 1) = energy_to_temp(Stocks(i, 1), p.metal_specific_heat * p.metal_volume * p.metal_density);
