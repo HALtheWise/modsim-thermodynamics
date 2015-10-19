@@ -17,13 +17,15 @@ global FuelTemperatures;
 FuelTemperatures = initial_temperature;
 
 % Run simulation
-[Times, Stocks] = eulers_method(stocks, @rocket_flows, params, 60, 5);
+time_span = [0 100];
+[Times, Stocks] = ode45(@rocket_flows, time_span, stocks, [], params);
 
+plot(Times, Stocks);
 % Graph results
-clf;
-plot(Times / 60, MetalTemperatures - 270,'.');
-plot(Times / 60, FuelTemperatures - 270,'.');
+%clf;
+%plot(Times / 60, MetalTemperatures - 270,'.');
+%plot(Times / 60, FuelTemperatures - 270,'.');
 title('Rocket heat flow (through fuel) simulation');
-xlabel('Elapsed time (minutes)');
+xlabel('Elapsed time (sec)');
 ylabel('Temperature (°C)');
 legend('Metal', 'Fuel');

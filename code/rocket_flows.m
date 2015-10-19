@@ -1,4 +1,4 @@
-function res = rocket_flows( stocks, params )
+function res = rocket_flows(~, stocks, params)
 %ROCKET_FLOWS computes flows for the Thermodynamics project
     metal_energy = stocks(1);
     fuel_energy = stocks(2);
@@ -29,12 +29,12 @@ function res = rocket_flows( stocks, params )
     radiative_loss = p.metal_radiative_emmisivity*SB*p.metal_surface_area * ...
         (metal_temp ^ 4 - p.air_temp^4); % J/s
     transfer_to_coolant = p.heat_transfer_coefficient * ...
-        p.tubing_surface_area * (fuel_temp - metal_temp); % J/s convective
+        p.tubing_surface_area * (metal_temp - fuel_temp); % J/s convective
     coolant_inflow = p.fuel_flow_rate * p.fuel_density * ...
         (fuel_temp - p.fuel_cold_temp); % mass exchange
    
     %TODO: this needs to become a column vector for ode45 compatibility
-    res = [heat_from_exhaust - radiative_loss - transfer_to_coolant, ...
-            transfer_to_coolant - coolant_inflow];
+    res = [(heat_from_exhaust - radiative_loss - transfer_to_coolant) ; 
+            (transfer_to_coolant - coolant_inflow)];
 end
 
