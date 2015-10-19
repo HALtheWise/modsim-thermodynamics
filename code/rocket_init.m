@@ -1,5 +1,5 @@
 % Define simulation parameters
-rocket; %Call to external definition of flow parameters
+rocket_parameters; %Call to external definition of flow parameters
 params = p;
 clear('p')
 
