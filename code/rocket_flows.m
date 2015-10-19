@@ -7,12 +7,14 @@ function res = rocket_flows( stocks, params )
     
     % Calculate variables
     fuel_mass = p.fuel_density * p.fuel_volume; %kg
-    fuel_heat_capacity = fuel_mass * p.fuelspecific_heat; 
+    fuel_heat_capacity = fuel_mass * p.fuelspecific_heat;
     
-    metal_heat_capacity = p.metal_mass * p.metal_specific_heat;
+    metal_mass = p.mnetal_volume * p.metal_density;
+    metal_heat_capacity = metal_mass * p.metal_specific_heat;
     
-    fuel_temp = fuel_energy / heat_capacity;
-    metal_temp = metal_energy / heat_capacity;
+    % TODO: This should be handled in an external function
+    fuel_temp = fuel_energy / fuel_heat_capacity;
+    metal_temp = metal_energy / metal_heat_capacity;
     
     % Export coffe_temp
     global FuelTemperatures;
@@ -21,9 +23,18 @@ function res = rocket_flows( stocks, params )
     MetalTemperatures(length(MetalTemperatures)+1) = metal_temp;
     
     %Calculate flows
-    radiative_input = !!!(p.cup_cond*conduction_area/p.cup_t)*(coffee_temp-p.env_temp);
-    convective_loss = !!!p.convective_heat_transfer_coeff*convection_area*(coffee_temp-p.env_temp);
+    SB = 5.67e-8; %W/m2K
+    
+    heat_from_exhaust = p.heat_flow_from_exhaust; % J/s
+    radiative_loss = p.metal_radiative_emmisivity*SB*p.metal_surface_area * ...
+        (metal_temp ^ 4 - p.air_temp^4); % J/s
+    transfer_to_coolant = p.heat_transfer_coefficient * ...
+        p.tubing_surface_area * (fuel_temp - metal_temp); % J/s convective
+    coolant_inflow = p.fuel_flow_rate * p.fuel_density * ...
+        (fuel_temp - p.fuel_cold_temp); % mass exchange
    
-    res = [-radiative_input - convective_loss];
+    %TODO: this needs to become a column vector for ode45 compatibility
+    res = [heat_from_exhaust - radiative_loss - transfer_to_coolant,
+            transfer_to_coolant - coolant_inflow];
 end
 
