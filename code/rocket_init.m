@@ -22,6 +22,11 @@ FuelTemperatures = initial_temperature;
 time_span = [0 100];
 [Times, Stocks] = ode45(@rocket_flows, time_span, stocks, [], params);
 
+for i=1:size(Stocks)
+    Stocks(i, 1) = energy_to_temp(Stocks(i, 1), p.metal_specific_heat * p.metal_volume * p.metal_density);
+    Stocks(i, 2) = energy_to_temp(Stocks(i, 2), p.fuel_specific_heat * p.fuel_volume * p.fuel_density);
+end
+
 plot(Times, Stocks);
 % Graph results
 %clf;
