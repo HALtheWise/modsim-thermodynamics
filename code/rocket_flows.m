@@ -1,26 +1,20 @@
 function res = rocket_flows(~, stocks, params)
 %ROCKET_FLOWS computes flows for the Thermodynamics project
     metal_energy = stocks(1);
-    fuel_energy = stocks(2);
+    fuel_energies = stocks(2:length(stocks));
     
     p = params;
     
     % Calculate variables
-    fuel_mass = p.fuel_density * p.fuel_volume; %kg
+    fuel_mass = p.fuel_density * p.fuel_volume / p.num_coolant_stocks; %kg (per unit)
     fuel_heat_capacity = fuel_mass * p.fuel_specific_heat;
     
     metal_mass = p.metal_volume * p.metal_density;
     metal_heat_capacity = metal_mass * p.metal_specific_heat;
     
     % TODO: This should be handled in an external function
-    fuel_temp = fuel_energy / fuel_heat_capacity;
+    fuel_temp = fuel_energies / fuel_heat_capacity;
     metal_temp = metal_energy / metal_heat_capacity;
-    
-    % Export temperatures
-    global FuelTemperatures;
-    FuelTemperatures(length(FuelTemperatures)+1) = fuel_temp;
-    global MetalTemperatures;
-    MetalTemperatures(length(MetalTemperatures)+1) = metal_temp;
     
     %Calculate flows
     SB = 5.67e-8; %W/m2K: Stefan-Boltzman constant
