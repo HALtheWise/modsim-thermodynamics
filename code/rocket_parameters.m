@@ -22,3 +22,5 @@ p.heat_transfer_coefficient = 1200; %math behind this is extremely complex, this
 p.heat_flow_from_exhaust = 3500;
 
 p.fuel_flow_rate = 0.01; %m^3/s
+
+p.num_coolant_stocks = 5;

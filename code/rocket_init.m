@@ -6,8 +6,10 @@ initial_temperature = 300; % K
 
 % Calculate initial energy
 metal_heat = p.metal_density*p.metal_volume * p.metal_specific_heat * p.metal_initial_temp;
-fuel_heat = p.fuel_density*p.fuel_volume * p.fuel_specific_heat * p.fuel_cold_temp;
-stocks = [metal_heat, fuel_heat];
+total_fuel_heat = p.fuel_density*p.fuel_volume * p.fuel_specific_heat * p.fuel_cold_temp;
+stocks(1) = metal_heat;
+stocks(2:p.num_coolant_stocks+1) = total_fuel_heat / p.num_coolant_stocks;
+disp(stocks)
 clear('p')
 
 % Create extra tracking for Temperature
