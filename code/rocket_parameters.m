@@ -1,10 +1,10 @@
-% rocket_parameters.m
+% rocket.m
 
 p.air_temp = 290;
 
 p.fuel_specific_heat = 15000; % paper
 p.fuel_cold_temp = 91.7; % K, paper
-p.fuel_volume = 3; 
+p.fuel_volume = 1; 
 p.fuel_density = 71.0; % paper
 p.fuel_heat_capacity = p.fuel_volume * p.fuel_density * p.fuel_specific_heat;
 
@@ -21,4 +21,6 @@ p.heat_transfer_coefficient = 1200; %math behind this is extremely complex, this
 
 p.heat_flow_from_exhaust = 100000000;
 
-p.fuel_flow_rate = 0.1; %m^3/s
+p.fuel_flow_rate = 0.01; %m^3/s
+
+p.num_coolant_stocks = 5;

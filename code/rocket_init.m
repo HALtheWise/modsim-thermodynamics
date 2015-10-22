@@ -5,8 +5,10 @@ initial_temperature = 300; % K
 
 % Calculate initial energy
 metal_heat = p.metal_density*p.metal_volume * p.metal_specific_heat * p.metal_initial_temp;
-fuel_heat = p.fuel_density*p.fuel_volume * p.fuel_specific_heat * p.fuel_cold_temp;
-stocks = [metal_heat, fuel_heat];
+total_fuel_heat = p.fuel_density*p.fuel_volume * p.fuel_specific_heat * p.fuel_cold_temp;
+stocks = metal_heat;
+stocks(1,2:p.num_coolant_stocks+1) = total_fuel_heat / p.num_coolant_stocks;
+disp(stocks)
 
 % Create extra tracking for Temperature
 global MetalTemperatures;
@@ -30,5 +32,5 @@ plot(Times, Stocks);
 %plot(Times / 60, FuelTemperatures - 270,'.');
 title('Rocket heat flow (through fuel) simulation');
 xlabel('Elapsed time (sec)');
-ylabel('Temperature (°C)');
-legend('Metal', 'Fuel');
+ylabel('Energy (J)'); %°
+%legend('Metal', 'Fuel');
