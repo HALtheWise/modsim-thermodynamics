@@ -22,7 +22,7 @@ time_span = [0 200];
 
 for i=1:size(Stocks)
     Stocks(i, 1) = energy_to_temp(Stocks(i, 1), p.metal_specific_heat * p.metal_volume * p.metal_density);
-    Stocks(i, 2) = energy_to_temp(Stocks(i, 2), p.fuel_specific_heat * p.fuel_volume * p.fuel_density);
+    Stocks(i, 2:end) = energy_to_temp(Stocks(i, 2:end), p.fuel_specific_heat * p.fuel_volume * p.fuel_density / p.num_coolant_stocks);
 end
 
 plot(Times, Stocks);
