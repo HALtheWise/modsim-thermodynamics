@@ -14,7 +14,7 @@ function res = rocket_flows(~, stocks, params)
     metal_heat_capacity = metal_mass * p.metal_specific_heat;
     
     % TODO: This should be handled in an external function
-    metal_temp = metal_energy / metal_heat_capacity;
+    metal_temp = energy_to_temp(metal_energy, metal_heat_capacity);
     
     %Calculate flows
     SB = 5.67e-8; %W/m2K: Stefan-Boltzman constant

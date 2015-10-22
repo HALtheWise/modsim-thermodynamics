@@ -11,7 +11,7 @@ stocks(1,2:p.num_coolant_stocks+1) = total_fuel_heat / p.num_coolant_stocks;
 disp(stocks)
 
 % Run simulation
-time_span = [0 200];
+time_span = [0 1000];
 [Times, Stocks] = ode45(@rocket_flows, time_span, stocks, [], p);
 
 for i=1:size(Stocks)
@@ -27,4 +27,4 @@ plot(Times, Stocks);
 title('Rocket heat flow (through fuel) simulation');
 xlabel('Elapsed time (sec)');
 ylabel('Temperature (°C)'); %
-%legend('Metal', 'Fuel');
+legend('Metal', 'Fuel 1', 'Fuel 2', '...', '', '');
