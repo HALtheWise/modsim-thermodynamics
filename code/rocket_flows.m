@@ -45,7 +45,7 @@ function res = rocket_flows(~, stocks, params)
     end
     
     res = cat(1, heat_from_exhaust - radiative_loss - sum(transfers_to_fuel),...
-                transfers_to_fuel+transfers_between_fuel);
+                transfers_to_fuel-transfers_between_fuel);
  
 end
 

@@ -33,5 +33,5 @@ plot(Times, Stocks);
 %plot(Times / 60, FuelTemperatures - 270,'.');
 title('Rocket heat flow (through fuel) simulation');
 xlabel('Elapsed time (sec)');
-ylabel('Temperature (°C)');
-legend('Metal', 'Fuel');
+ylabel('Energy (J)'); %°
+%legend('Metal', 'Fuel');
