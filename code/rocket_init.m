@@ -10,7 +10,6 @@ total_fuel_heat = p.fuel_density*p.fuel_volume * p.fuel_specific_heat * p.fuel_c
 stocks = metal_heat;
 stocks(1,2:p.num_coolant_stocks+1) = total_fuel_heat / p.num_coolant_stocks;
 disp(stocks)
-clear('p')
 
 % Create extra tracking for Temperature
 global MetalTemperatures;
