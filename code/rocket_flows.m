@@ -27,8 +27,8 @@ function res = rocket_flows(~, stocks, params)
     %coolant_inflow = p.fuel_flow_rate * p.fuel_density * ...
     %    (fuel_temp - p.fuel_cold_temp); % mass exchange
    
-    transfers_to_fuel = zeros(1,num_fuel);
-    transfers_between_fuel = zeros(1,num_fuel);
+    transfers_to_fuel = zeros(num_fuel,1);
+    transfers_between_fuel = zeros(num_fuel,1);
     
     for i=1:num_fuel
         if i == 1
@@ -41,13 +41,11 @@ function res = rocket_flows(~, stocks, params)
         transfers_between_fuel(i) = p.fuel_flow_rate * ...
             p.fuel_heat_capacity * p.fuel_density * ...
             (fuel_temp - lastTemp);
-        
         lastTemp = fuel_temp;
     end
     
-    %TODO: this needs to become a column vector for ode45 compatibility
-    res = cat(2, heat_from_exhaust - radiative_loss - sum(transfers_to_fuel),...
                 transfers_between_fuel);
+    res = cat(1, heat_from_exhaust - radiative_loss - sum(transfers_to_fuel),...
  
 end
 
