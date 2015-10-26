@@ -1,5 +1,5 @@
 % Define simulation parameters
-rocket_parameters; %Call to external definition of flow parameters
+p = rocket_parameters(); %Call to external definition of flow parameters
 
 initial_temperature = p.air_temp; % K
 
