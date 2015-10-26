@@ -13,12 +13,21 @@ function res = rocket_parameters()
     p.metal_surface_area = 8 * pi; % m^2
     p.metal_density = 8890; % paper
     p.metal_radiative_emmisivity = 0.02; %copper (unoxidized)
-p.metal_melting_point = 1053;
 
+<<<<<<< HEAD
     p.tube_volume = p.fuel_volume;
     p.number_of_tubes = 200;
     p.tube_radius = pi / p.number_of_tubes;
     p.tubing_surface_area = p.tube_radius * 2 * pi * p.number_of_tubes;
+=======
+p.metal_specific_heat = 450; % paper (copper)
+p.metal_initial_temp = 290; 
+p.metal_volume = 0.84 * pi; % m^3
+p.metal_surface_area = 8 * pi; % m^2
+p.metal_density = 8890; % paper
+p.metal_radiative_emmisivity = 0.02; %copper (unoxidized)
+p.metal_melting_point = 1053;
+>>>>>>> origin/master
 
     p.heat_transfer_coefficient = 12000; %math behind this is extremely complex, this is the value of heat transfer coefficient for water flowing in tubes
 
@@ -26,7 +35,13 @@ p.metal_melting_point = 1053;
 
     p.fuel_flow_rate = 0.1 * 1e-3; %m^3/s
 
+<<<<<<< HEAD
     p.num_coolant_stocks = 50;
     
     res = p;
 end
+=======
+p.fuel_flow_rate = 0.01 * 1e-2; %m^3/s
+
+p.num_coolant_stocks = 50;
+>>>>>>> origin/master
