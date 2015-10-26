@@ -12,7 +12,7 @@ function res = rocket_parameters()
     p.metal_melting_point = 1053;
 
     p.number_of_tubes = 200;
-    p.tube_radius = pi / p.number_of_tubes;
+    p.tube_radius = .5 * 1e-2; %cm, converted to m
     p.tube_length = p.chamber_length; %meter
     p.tube_volume = pi * p.tube_radius^2 * p.tube_length * p.number_of_tubes
     p.tubing_surface_area = p.tube_radius * 2 * pi * p.tube_length * p.number_of_tubes
