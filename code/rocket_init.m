@@ -7,7 +7,7 @@ initial_temperature = p.air_temp; % K
 
 % Calculate initial energy
 [Times, Stocks] = simulation(p);
-
+important_values(Stocks);
 x1 = [0 1000];
 y1 = [p.metal_melting_point p.metal_melting_point];
 hold on

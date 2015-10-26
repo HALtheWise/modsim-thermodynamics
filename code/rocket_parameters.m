@@ -11,11 +11,11 @@ function res = rocket_parameters()
     p.metal_radiative_emmisivity = 0.02; %copper (unoxidized)
     p.metal_melting_point = 1053;
 
-    p.number_of_tubes = 400;
+    p.number_of_tubes = 200;
     p.tube_radius = pi / p.number_of_tubes;
     p.tube_length = p.chamber_length; %meter
-    p.tube_volume = pi * p.tube_radius^2 * p.tube_length * p.number_of_tubes;
-    p.tubing_surface_area = p.tube_radius * 2 * pi * p.tube_length * p.number_of_tubes;
+    p.tube_volume = pi * p.tube_radius^2 * p.tube_length * p.number_of_tubes
+    p.tubing_surface_area = p.tube_radius * 2 * pi * p.tube_length * p.number_of_tubes
 
     p.fuel_specific_heat = 15000; % J / kg paper % Coolant is liquid hydrogen
     p.fuel_cold_temp = 91.7; % K, paper
