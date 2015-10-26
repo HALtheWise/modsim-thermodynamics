@@ -11,7 +11,7 @@ function res = rocket_parameters()
     p.metal_radiative_emmisivity = 0.02; %copper (unoxidized)
     p.metal_melting_point = 1053;
 
-    p.number_of_tubes = 200;
+    p.number_of_tubes = 300;
     p.tube_radius = .5 * 1e-2; %cm, converted to m
     p.tube_length = p.chamber_length; %meter
     p.tube_volume = pi * p.tube_radius^2 * p.tube_length * p.number_of_tubes
