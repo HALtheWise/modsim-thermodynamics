@@ -10,8 +10,8 @@ for i = 1:length(testpoints)
     p = rocket_parameters();
     p.fuel_flow_rate = testpt;
     
-    [Times Stocks] = simulation(p);
-    [MetalTemps(i) FuelTemps(i)] = important_values(Stocks);
+    [Times, Stocks] = simulation(p);
+    [MetalTemps(i), FuelTemps(i)] = important_values(Stocks);
 end
 
 plot(testpoints, MetalTemps);
