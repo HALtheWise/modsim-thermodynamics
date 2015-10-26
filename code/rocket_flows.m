@@ -7,7 +7,7 @@ function res = rocket_flows(~, stocks, params)
     p = params;
     
     % Calculate variables
-    fuel_mass = p.fuel_density * p.fuel_volume / p.num_coolant_stocks; %kg (per unit)
+    fuel_mass = p.fuel_density * p.tube_volume / p.num_coolant_stocks; %kg (per unit)
     fuel_heat_capacity = fuel_mass * p.fuel_specific_heat;
     
     metal_mass = p.metal_volume * p.metal_density;
