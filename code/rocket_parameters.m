@@ -14,6 +14,7 @@ p.metal_volume = 0.84 * pi; % m^3
 p.metal_surface_area = 8 * pi; % m^2
 p.metal_density = 8890; % paper
 p.metal_radiative_emmisivity = 0.02; %copper (unoxidized)
+p.metal_melting_point = 1053;
 
 p.tube_volume = p.fuel_volume;
 p.number_of_tubes = 200;
@@ -24,6 +25,6 @@ p.heat_transfer_coefficient = 12000; %math behind this is extremely complex, thi
 
 p.heat_flow_from_exhaust = 100000000;
 
-p.fuel_flow_rate = 0.01 * 1e-3; %m^3/s
+p.fuel_flow_rate = 0.01 * 1e-2; %m^3/s
 
 p.num_coolant_stocks = 50;
