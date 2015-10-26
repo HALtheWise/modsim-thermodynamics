@@ -10,10 +10,9 @@ function [res1, res2] = simulation(p)
     [Times, Stocks] = ode23s(@rocket_flows, time_span, stocks, [], p);
 
     % Convert energies to temperatures
-    for i=1:size(Stocks)
-        Stocks(i, 1) = energy_to_temp(Stocks(i, 1), p.metal_specific_heat * p.metal_volume * p.metal_density);
-        Stocks(i, 2:end) = energy_to_temp(Stocks(i, 2:end), p.fuel_specific_heat * p.tube_volume * p.fuel_density / p.num_coolant_stocks);
-    end
+    Stocks(:, 1) = energy_to_temp(Stocks(:, 1), p.metal_specific_heat * p.metal_volume * p.metal_density);
+    Stocks(:, 2:end) = energy_to_temp(Stocks(:, 2:end), p.fuel_specific_heat * p.tube_volume * p.fuel_density / p.num_coolant_stocks);
+    
     res1 = Times;
     res2 = Stocks;
 end
