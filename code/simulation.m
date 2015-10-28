@@ -1,4 +1,10 @@
 function [res1, res2] = simulation(p)
+    % Calculate varying quantities
+    p.tube_volume = pi * p.tube_radius^2 * p.tube_length * p.number_of_tubes;
+    p.tubing_surface_area = p.tube_radius * 2 * pi * p.tube_length * p.number_of_tubes;
+    p.fuel_heat_capacity = p.tube_volume * p.fuel_density * p.fuel_specific_heat;
+
+
     metal_heat = p.metal_density*p.metal_volume * p.metal_specific_heat * p.metal_initial_temp;
     total_fuel_heat = p.fuel_density*p.tube_volume * p.fuel_specific_heat * p.fuel_cold_temp;
 
