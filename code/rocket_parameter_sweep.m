@@ -17,6 +17,9 @@ for i = 1:length(testpoints)
     [Times, Stocks] = simulation(p);
     [MetalTemps(i), FuelTemps(i)] = important_values(Stocks);
 end
+x1 = [0 0.6];
+y1 = [1053 1053];
+plot(x1, y1);
 
 plot(testpoints, MetalTemps);
 plot(testpoints, FuelTemps);
