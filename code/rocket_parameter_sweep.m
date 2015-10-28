@@ -1,32 +1,32 @@
 clf
 hold on
-testpoints = linspace(1, 1000, 30);
+testpoints = linspace(0.1, 0.5, 10);
+testpoints2 = linspace(10, 400, 10);
 
 MetalTemps = zeros(1, length(testpoints));
 FuelTemps = zeros(1, length(testpoints));
 
+values = [1:length(testpoints); 1:length(testpoints2)];
 for i = 1:length(testpoints)
-    testpt = testpoints(i);
-    p = rocket_parameters();
+    p = rocket_parameters(); 
+    p.fuel_flow_rate = testpoints(i);
     
-    % Alter initial conditions
-%     p.fuel_flow_rate = testpt;
-     p.number_of_tubes = testpt;
-%    p.tube_radius = testpt;
-    
-    [Times, Stocks] = simulation(p);
-    [MetalTemps(i), FuelTemps(i)] = important_values(Stocks);
+    for j = 1:length(testpoints2)
+        p.number_of_tubes = testpoints2(j);
+        [Times, Stocks] = simulation(p);
+        [values(i, j), ~] = important_values(Stocks);
+    end
 end
-x1 = [0 0.6];
-y1 = [1053 1053];
-plot(x1, y1);
+%scatter(values)
+%HeatMap(values, 'RowLabels', testpoints, 'ColumnLabels', testpoints2);
+imagesc(testpoints, testpoints2, values)
+colormap jet;
+%plot(testpoints, MetalTemps);
+%plot(testpoints, FuelTemps);
 
-plot(testpoints, MetalTemps);
-plot(testpoints, FuelTemps);
-
-title('Cooling effectiveness upon varying flow rates');
+%title('Cooling effectiveness upon varying flow rates');
 % xlabel('Fuel flow rate(m^3/s)');
 xlabel('Number of Tubes');
 %xlabel('Radius of Tubes (m)');
 ylabel('Maximum temperature (K)');
-legend('Metal', 'Fuel');
+legend('Metal Melting Point', 'Metal', 'Fuel');
