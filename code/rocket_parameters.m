@@ -25,7 +25,7 @@ function res = rocket_parameters()
 
     p.fuel_flow_rate = 0.3; %m^3/s
 
-    p.num_coolant_stocks = 50;
+    p.num_coolant_stocks = 15;
     
     res = p;
 end
