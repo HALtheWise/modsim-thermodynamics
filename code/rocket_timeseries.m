@@ -11,8 +11,8 @@ y1 = [p.metal_melting_point p.metal_melting_point];
 hold on
 plot(x1, y1, 'g');
 
-plot(Times, Stocks(:,1) - 270, 'r*-');
-plot(Times, Stocks(:, 2:end) - 270, '');
+plot(Times, Stocks(:,1:p.num_coolant_stocks) - 270, 'r-');
+plot(Times, Stocks(:, p.num_coolant_stocks+1:end) - 270, 'b-');
 % Graph results
 %clf;
 %plot(Times / 60, MetalTemperatures - 270,'.');
@@ -20,5 +20,5 @@ plot(Times, Stocks(:, 2:end) - 270, '');
 title('Rocket heat flow (through fuel) simulation');
 xlabel('Elapsed time (sec)');
 ylabel('Temperature (°C)'); %
-legend('Melting point', 'Metal',...
+legend('Melting point', 'Metals',...
     'Fuel 1', 'Fuel 2', 'Fuel 3', '...');
