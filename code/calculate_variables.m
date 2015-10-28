@@ -1,4 +1,4 @@
-function [ p ] = rocket_calculate_vars( p )
+function [ p ] = calculate_variables( p )
 %ROCKET_CALCULATE_NONCONSTANTS Summary of this function goes here
 %   Detailed explanation goes here
     p.tube_volume = pi * p.tube_radius^2 * p.tube_length * p.number_of_tubes;

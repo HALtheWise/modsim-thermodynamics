@@ -1,6 +1,6 @@
 function [res1, res2] = simulation(p)
     % Calculate varying quantities
-     p = rocket_calculate_vars(p);
+     p = calculate_variables(p);
 
     total_metal_heat = p.metal_density*p.metal_volume * p.metal_specific_heat * p.metal_initial_temp;
     total_fuel_heat = p.fuel_density*p.tube_volume * p.fuel_specific_heat * p.fuel_cold_temp;
