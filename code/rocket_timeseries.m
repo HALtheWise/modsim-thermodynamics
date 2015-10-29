@@ -11,16 +11,15 @@ Times = Times / 60;
 x1 = [min(Times) max(Times)];
 y1 = [p.metal_melting_point p.metal_melting_point];
 hold on
-plot(x1, y1, 'g');
+melting_line = plot(x1, y1, 'g');
 
-plot(Times, Stocks(:,1:p.num_coolant_stocks) - 270, 'r-');
-plot(Times, Stocks(:, p.num_coolant_stocks+1:end) - 270, 'b-');
-% Graph results
-%clf;
-%plot(Times / 60, MetalTemperatures - 270,'.');
-%plot(Times / 60, FuelTemperatures - 270,'.');
-title('Rocket heat flow (through fuel) simulation');
-xlabel('Elapsed time (sec)');
+fuel_lines = plot(Times, Stocks(:, p.num_coolant_stocks+1:end) - 270, 'b-');
+metal_lines = plot(Times, Stocks(:,1:p.num_coolant_stocks) - 270, 'r-');
+
+
+
+title('Rocket heat flow simulation');
+xlabel('Elapsed time (minutes)');
 ylabel('Temperature (°C)'); %
-legend('Melting point', 'Metals',...
-    'Fuel 1', 'Fuel 2', 'Fuel 3', '...');
+legend([melting_line, metal_lines(1), fuel_lines(1)], 'Melting point', ...
+    'Metal temperatures','Fuel temperatures');
