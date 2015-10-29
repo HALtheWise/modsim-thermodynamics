@@ -9,7 +9,7 @@ function [res1, res2] = simulation(p)
     stocks(1,p.num_coolant_stocks+1:2*p.num_coolant_stocks) = total_fuel_heat / p.num_coolant_stocks;
 
     % Run simulation
-    time_span = [0 1000];
+    time_span = [0 20*60];
     [Times, Stocks] = ode23s(@rocket_flows, time_span, stocks, [], p);
 
     % Convert energies to temperatures

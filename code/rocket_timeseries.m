@@ -5,6 +5,8 @@ clf
 % Calculate initial energy
 [Times, Stocks] = simulation(p);
 
+Times = Times / 60;
+
 %Plot melting point
 x1 = [min(Times) max(Times)];
 y1 = [p.metal_melting_point p.metal_melting_point];
