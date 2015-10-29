@@ -1,7 +1,7 @@
 clf
 hold on
-testpoints = linspace(0.1, 0.5, 10);
-testpoints2 = linspace(10, 400, 10);
+testpoints = linspace(0.1, 1.0, 20);
+testpoints2 = linspace(100, 500, 20);
 
 MetalTemps = zeros(1, length(testpoints));
 FuelTemps = zeros(1, length(testpoints));
@@ -19,14 +19,17 @@ for i = 1:length(testpoints)
 end
 %scatter(values)
 %HeatMap(values, 'RowLabels', testpoints, 'ColumnLabels', testpoints2);
-imagesc(testpoints, testpoints2, values)
-colormap jet;
+figure
+contourf(values)
+colorbar
+%imagesc(testpoints, testpoints2, values)
+%colormap jet;
 %plot(testpoints, MetalTemps);
 %plot(testpoints, FuelTemps);
 
 %title('Cooling effectiveness upon varying flow rates');
 % xlabel('Fuel flow rate(m^3/s)');
-xlabel('Number of Tubes');
+ylabel('Number of Tubes');
 %xlabel('Radius of Tubes (m)');
-ylabel('Maximum temperature (K)');
+xlabel('Maximum temperature (K)');
 legend('Metal Melting Point', 'Metal', 'Fuel');
