@@ -1,5 +1,5 @@
 function res = rocket_parameters()
-    p.air_temp = 290;
+    p.air_temp = 290; % K
 
     p.chamber_length = 1; % meter
     

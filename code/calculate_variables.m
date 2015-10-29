@@ -11,4 +11,3 @@ function [ p ] = calculate_variables( p )
     p.metal_mass = p.metal_volume * p.metal_density / p.num_coolant_stocks; %kg (per unit);
     p.metal_heat_capacity = p.metal_mass * p.metal_specific_heat;
 end
-
