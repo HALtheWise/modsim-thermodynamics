@@ -1,7 +1,7 @@
 %% Declaring domain for experiment
 
-testpoints = linspace(0.1, 1.0, 20);
-testpoints2 = linspace(100, 500, 20);
+testpoints = linspace(0.1, 3.0, 20); % Fuel flow rate (m^3/s)
+testpoints2 = linspace(100, 500, 20); % Number of tubes
 
 %% Calculating ODE results
 
@@ -25,11 +25,16 @@ clf
 hold on
 %scatter(values)
 %HeatMap(values, 'RowLabels', testpoints, 'ColumnLabels', testpoints2);
-figure
-contourf(values)
-colorbar
+%figure
+contourf(testpoints, testpoints2, values, 100, 'r', ...
+    'Fill', 'on', 'ShowText', 'off', 'LineWidth', 0)
+
+contour(testpoints, testpoints2, values, [p.metal_melting_point, p.metal_melting_point * 0.8], 'w', ...
+    'Fill', 'off', 'ShowText', 'on', 'LabelSpacing', 400,...
+    'LineWidth', 1)
+%colorbar
 %imagesc(testpoints, testpoints2, values)
-%colormap jet;
+colormap jet;
 %plot(testpoints, MetalTemps);
 %plot(testpoints, FuelTemps);
 
@@ -37,5 +42,5 @@ colorbar
 % xlabel('Fuel flow rate(m^3/s)');
 ylabel('Number of Tubes');
 %xlabel('Radius of Tubes (m)');
-xlabel('Maximum temperature (K)');
-legend('Metal Melting Point', 'Metal', 'Fuel');
+xlabel('Fuel flow rate (m³/s)');
+%legend('Metal Melting Point', 'Metal', 'Fuel');
