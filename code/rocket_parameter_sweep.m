@@ -1,7 +1,9 @@
-clf
-hold on
+%% Declaring domain for experiment
+
 testpoints = linspace(0.1, 1.0, 20);
 testpoints2 = linspace(100, 500, 20);
+
+%% Calculating ODE results
 
 MetalTemps = zeros(1, length(testpoints));
 FuelTemps = zeros(1, length(testpoints));
@@ -17,6 +19,10 @@ for i = 1:length(testpoints)
         [values(i, j), ~] = important_values(Stocks);
     end
 end
+%% Plotting results
+
+clf
+hold on
 %scatter(values)
 %HeatMap(values, 'RowLabels', testpoints, 'ColumnLabels', testpoints2);
 figure
