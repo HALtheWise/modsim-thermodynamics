@@ -1,7 +1,7 @@
 %% Declaring domain for experiment
 
-testpoints = logspace(log10(0.1), log10(3), 10); % Fuel flow rate (m^3/s)
-testpoints2 = linspace(100, 1000, 10); % Number of tubes
+testpoints = logspace(log10(0.1), log10(1), 20); % Fuel flow rate (m^3/s)
+testpoints2 = linspace(100, 1000, 40); % Number of tubes
 
 %% Calculating ODE results
 
@@ -18,10 +18,11 @@ end
 
 clf
 hold on
+caxis([500, 1500]);
+colormap jet;
 %scatter(values)
 %HeatMap(values, 'RowLabels', testpoints, 'ColumnLabels', testpoints2);
 %figure
-caxis([500, 1500]);
 
 contourf(testpoints, testpoints2, values', 200, 'r', ...
     'Fill', 'on', 'ShowText', 'off', 'LineWidth', 0)
@@ -33,9 +34,9 @@ p = rocket_parameters();
 
 
 clabel(C, 'FontSize', 13, 'Color', 'k', 'Rotation', -87);
-%colorbar
-%imagesc(testpoints, testpoints2, values)
-colormap jet;
+c = colorbar;
+c.Label.String = 'Peak metal temperature  (K)';
+%imagesc(testpoints, testpoints2, values')
 %plot(testpoints, MetalTemps);
 %plot(testpoints, FuelTemps);
 
@@ -46,5 +47,5 @@ ylabel('Number of Tubes');
 %xlim([0, 5])
 %xlabel('Radius of Tubes (m)');
 xlabel('Fuel flow rate (m³/s)');
-title('Rocket cooling behavior');
+title('Rocket parameter space exploration');
 %legend('Metal Melting Point', 'Metal', 'Fuel');
