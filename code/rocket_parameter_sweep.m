@@ -1,6 +1,6 @@
 %% Declaring domain for experiment
 
-testpoints = linspace(.1, 3, 10); % Fuel flow rate (m^3/s)
+testpoints = logspace(log10(0.1), log10(3), 10); % Fuel flow rate (m^3/s)
 testpoints2 = linspace(100, 1000, 10); % Number of tubes
 
 %% Calculating ODE results
