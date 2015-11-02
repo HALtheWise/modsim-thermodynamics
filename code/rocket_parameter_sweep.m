@@ -1,21 +1,17 @@
 %% Declaring domain for experiment
 
-testpoints = linspace(0.1, 3, 10); % Fuel flow rate (m^3/s)
-testpoints2 = linspace(100, 500, length(testpoints)); % Number of tubes
+testpoints = linspace(.1, 3, 10); % Fuel flow rate (m^3/s)
+testpoints2 = linspace(100, 1000, 10); % Number of tubes
 
 %% Calculating ODE results
 
-values = zeros(length(testpoints), length(testpoints));
+values = zeros(length(testpoints), length(testpoints2));
 for i = 1:length(testpoints)
     
     for j = 1:length(testpoints2)
-        clear Times
-        clear Stocks
-        p = rocket_parameters(); 
-        p.fuel_flow_rate = testpoints(i);
-        p.number_of_tubes = testpoints2(j);
-        [Times, Stocks] = simulation(p);
-        [values(i, j), ~] = important_values(Stocks);
+        
+        values(i,j) = parameter_test(testpoints2(j), testpoints(i));
+        
     end
 end
 %% Plotting results
@@ -25,14 +21,16 @@ hold on
 %scatter(values)
 %HeatMap(values, 'RowLabels', testpoints, 'ColumnLabels', testpoints2);
 %figure
-contourf(testpoints, testpoints2, values, 200, 'r', ...
-    'Fill', 'on', 'ShowText', 'off', 'LineWidth', 0)
-
-[C, h] = contour(testpoints, testpoints2, values, [p.metal_melting_point, 850], 'k', ...
-    'Fill', 'off', 'ShowText', 'off', 'LabelSpacing', 400,...
-    'LineWidth', 1);
-
 caxis([500, 1500]);
+
+contourf(testpoints, testpoints2, values', 200, 'r', ...
+    'Fill', 'on', 'ShowText', 'off', 'LineWidth', 0)
+    
+p = rocket_parameters();
+[C, h] = contour(testpoints, testpoints2, values', [p.metal_melting_point, 850], 'k', ...
+   'Fill', 'off', 'ShowText', 'off', 'LabelSpacing', 400,...
+   'LineWidth', 1);
+
 
 clabel(C, 'FontSize', 13, 'Color', 'k', 'Rotation', -87);
 %colorbar
@@ -48,4 +46,5 @@ ylabel('Number of Tubes');
 %xlim([0, 5])
 %xlabel('Radius of Tubes (m)');
 xlabel('Fuel flow rate (m³/s)');
+title('Rocket cooling behavior');
 %legend('Metal Melting Point', 'Metal', 'Fuel');
